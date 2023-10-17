@@ -14,7 +14,7 @@
 plexServer="192.168.4.102"
 plexPort=32400
 
-source "/mnt/plexupdate/plexupdate-core"
+source "/opt/plexupdate/plexupdate-core"
 
 # Plex Database Location. The trailing slash is 
 # needed and important for rsync.
