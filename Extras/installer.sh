@@ -133,7 +133,7 @@ install_plexbackup() {
 		cd - &> /dev/null
 	else
 		echo -n "Installing plexbackup into '$FULL_PATH'... "
-		git clone --branch "${BRANCHNAME:-master}" "$ORIGIN_REPO" "$FULL_PATH" &> /dev/null || abort "install failed, cannot continue"
+		git clone --branch "${BRANCHNAME:-main}" "$ORIGIN_REPO" "$FULL_PATH" &> /dev/null || abort "install failed, cannot continue"
 		echo "done"
 	fi
 }
