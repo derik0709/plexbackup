@@ -41,17 +41,19 @@ fi
 
 # Create Log
 echo -e "***********" >> $log 2>&1
-echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Mounted Share in R/W Mode." | tee -a $log 2>&1
+echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Checking if Plex is running." | tee -a $log 2>&1
 
 
 # Check if Plex is running
 if running "${plexServer}" "${plexPort}"; then
     error "Server ${plexServer} is currently being used by one or more users, skipping installation. Please run again later"
+    echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Plex is running. Not going to do backup right now." | tee -a $log 2>&1
+    echo -e "***********" >> $log 2>&1
     exit 6
 fi
 
 # Stop Plex
-echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Stopping Plex Media Server." | tee -a $log 2>&1
+echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Plex is not running. Stopping Plex Media Server." | tee -a $log 2>&1
 sudo service plexmediaserver stop | tee -a $log 2>&1
 
 
