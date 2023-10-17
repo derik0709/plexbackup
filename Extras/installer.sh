@@ -10,6 +10,54 @@ VERBOSE=yes #to be inherited by get-plex-token, do not save to config
 CONFIGVARS="AUTOINSTALL AUTODELETE DOWNLOADDIR TOKEN FORCE FORCEALL PUBLIC AUTOSTART AUTOUPDATE PLEXSERVER PLEXPORT CHECKUPDATE NOTIFY"
 CRONVARS="CONF SCRIPT LOGGING"
 
+yesno() {
+	case "$1" in
+		"")
+			default="Y"
+			;;
+		yes)
+			default="Y"
+			;;
+		true)
+			default="Y"
+			;;
+		no)
+			default="N"
+			;;
+		false)
+			default="N"
+			;;
+		*)
+			default="$1"
+			;;
+	esac
+
+	default="$(tr "[:lower:]" "[:upper:]" <<< "$default")"
+	if [ "$default" == "Y" ]; then
+		prompt="[Y/n] "
+	else
+		prompt="[N/y] "
+	fi
+
+	while true; do
+		read -n 1 -p "$prompt" answer
+		answer=${answer:-$default}
+		answer="$(tr "[:lower:]" "[:upper:]" <<< "$answer")"
+
+		if [ "$answer" == "Y" ]; then
+			echo
+			return 0
+		elif [ "$answer" == "N" ]; then
+			echo
+			return 1
+		fi
+	done
+}
+
+noyes() {
+	yesno N
+}
+
 install() {
 	echo "'$req' is required but not installed, attempting to install..."
 	sleep 1
