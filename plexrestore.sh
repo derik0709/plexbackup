@@ -74,11 +74,11 @@ PS3="$_PS3"; unset _PS3
 
 # Restore database
 echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Starting restore process." | tee -a $log 2>&1
-sudo tar xz -f $name -C $plexDatabase
+sudo tar xz -f "$name" -C "$plexDatabase"
 
 # Changing permissions for Plex
 echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Updating database permissions." | tee -a $log 2>&1
-sudo chown -R plex:plex $plexDatabase | tee -a $log 2>&1
+sudo chown -R plex:plex "$plexDatabase" | tee -a $log 2>&1
 
 
 # Restart Plex
