@@ -63,7 +63,7 @@ echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Starting Backup." | tee -a $log 2>&1
 # cd into  directory so the magic --exclude below works per:
 # https://stackoverflow.com/questions/984204/shell-command-to-tar-directory-excluding-certain-files-folders
 cd "$plexDatabase"
-sudo tar cz --exclude='./Cache' -f "$backupDirectory/Derik-Plex-$(date '+%Y-%m(%b)-%d at %khr %Mmin').tar.gz" . >> $log 2>&1
+sudo tar cz --exclude='./Cache' -f "$backupDirectory/Derik-Plex-$(date '+%Y-%m(%b)-%d').tar.gz" . >> $log 2>&1
 
 
 # Restart Plex
