@@ -45,7 +45,7 @@ sudo service plexmediaserver stop | tee -a $log 2>&1
 
 
 # Select backup to restore
-backup="Which backup do you want to restore? "
+printf "Which backup do you want to restore? "
 
 while [ -z "$name" ]
 do
