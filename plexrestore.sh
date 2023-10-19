@@ -53,7 +53,7 @@ PS3="Which file do you want to use? "
 while [ -z "$name" ]
 do
 
-    select name in "$backup/*.tar.gz"; do break; done
+    select name in $backupDirectory/*.tar.gz; do break; done
 
     if [ -z "$name" ]
     then
@@ -74,8 +74,11 @@ PS3="$_PS3"; unset _PS3
 
 # Restore database
 echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Starting restore process." | tee -a $log 2>&1
-#sudo tar cz --exclude='./Cache' -f "$backupDirectory/Derik-Plex-$(date '+%Y-%m(%b)-%d at %khr %Mmin').tar.gz" . >> $log 2>&1
-#sudo tar xz -f /mnt/Backup/PMS/Derik-PMS-2023-10\(Oct\)-16.tar.gz -C $plexDatabase
+sudo tar xz -f $name -C $plexDatabase
+
+# Changing permissions for Plex
+echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Updating database permissions." | tee -a $log 2>&1
+sudo chown -R plex:plex $plexDatabase | tee -a $log 2>&1
 
 
 # Restart Plex
