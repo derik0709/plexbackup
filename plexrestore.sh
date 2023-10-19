@@ -36,7 +36,7 @@ fi
 
 # Create Log
 echo -e "***********" >> $log 2>&1
-echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Starting restore of Plex database ." | tee -a $log 2>&1
+echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Starting restore of Plex database." | tee -a $log 2>&1
 
 
 # Stop Plex
@@ -87,5 +87,5 @@ sudo service plexmediaserver start | tee -a $log 2>&1
 
 
 # Done
-echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Backup Complete." | tee -a $log 2>&1
+echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Restore Complete." | tee -a $log 2>&1
 echo -e "***********" >> $log 2>&1
