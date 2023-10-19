@@ -45,12 +45,12 @@ sudo service plexmediaserver stop | tee -a $log 2>&1
 
 
 # Select backup to restore
-printf "Which backup do you want to restore? "
+printf "Which backup do you want to restore? \n"
 
 while [ -z "$name" ]
 do
 
-    select name in *; do break; done
+    select name in "$backup/*.tar.gz"; do break; done
 
     if [ -z "$name" ]
     then
