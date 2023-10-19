@@ -45,7 +45,10 @@ sudo service plexmediaserver stop | tee -a $log 2>&1
 
 
 # Select backup to restore
-printf "Which backup do you want to restore? \n"
+unset name
+
+_PS3="$PS3"
+PS3="Which file do you want to use? "
 
 while [ -z "$name" ]
 do
@@ -66,6 +69,8 @@ do
     fi
 
 done
+
+PS3="$_PS3"; unset _PS3
 
 # Restore database
 echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Starting restore process." | tee -a $log 2>&1
