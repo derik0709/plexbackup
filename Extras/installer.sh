@@ -3,7 +3,7 @@
 ORIGIN_REPO="https://github.com/${GIT_OWNER:-derik0709}/plexbackup"
 FULL_PATH="/opt/plexbackup"
 CONFIGCRON="/etc/plexbackup.cron.conf"
-CRONWRAPPER="/etc/cron.daily/plexupdate"
+CRONWRAPPER="/etc/cron.daily/plexbackup"
 VERBOSE=yes #to be inherited by get-plex-token, do not save to config
 
 # variables to save in config
@@ -119,8 +119,8 @@ install_plexbackup() {
 
 	if [ -d "${FULL_PATH}/.git" ]; then
 		cd "$FULL_PATH"
-		if git remote -v 2>/dev/null | grep -q "plexupdate"; then
-			echo -n "Found existing plexupdate repository in '$FULL_PATH', updating... "
+		if git remote -v 2>/dev/null | grep -q "plexbackup"; then
+			echo -n "Found existing plexbackup repository in '$FULL_PATH', updating... "
 			if [ -w "${FULL_PATH}/.git" ]; then
 				git pull &>/dev/null || abort "unknown error while updating, please check '$FULL_PATH' and then try again."
 			else
