@@ -5,7 +5,7 @@
 # Original Author Scott Smereka
 # Edited by Neil C.
 # Edited by Derik Holland
-# Version 1.2
+# Version 1.3
 
 
 # Script Tested on:
@@ -24,6 +24,8 @@ plexDatabase="/var/lib/plexmediaserver/Library/Application Support/Plex Media Se
 # Location to backup the directory to.
 backupDirectory="/mnt/Backup/PMS"
 
+# Number of days to retain backups.
+retentionDays=30
 
 # Log file for script's output named with 
 # the script's name, date, and time of execution.
@@ -69,6 +71,10 @@ sudo tar cz --exclude='./Cache' -f "$backupDirectory/Derik-Plex-$(date '+%Y-%m(%
 # Restart Plex
 echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Starting Plex Media Server." | tee -a $log 2>&1
 sudo service plexmediaserver start | tee -a $log 2>&1
+
+# Delete backups older than the retention period
+echo -e "$(date '+%Y-%b-%d at %k:%M:%S') :: Deleting backups older than ${retentionDays} days." | tee -a $log 2>&1
+find "$backupDirectory" -maxdepth 1 -name "Derik-Plex-*.tar.gz" -mtime +${retentionDays} -print -delete >> $log 2>&1
 
 
 # Done
